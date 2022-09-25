@@ -12,6 +12,7 @@ import java.util.Scanner;
 public class Container {
 
     public static Scanner sc;
+    public static Session session;
 
     // repository
     public static MemberRepository memberRepository;
@@ -25,6 +26,8 @@ public class Container {
 
     static {
         sc = new Scanner(System.in);
+        session = new Session();
+
         memberRepository = new MemberRepository();
         memberService = new MemberService();
         memberController = new MemberController();
