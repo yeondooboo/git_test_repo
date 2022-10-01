@@ -64,4 +64,8 @@ public class UriParser {
     public Map<String, Object> getParameter() {
         return parameter;
     }
+
+    public String getURI(){
+        return URI;
+    }
 }

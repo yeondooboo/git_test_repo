@@ -62,6 +62,10 @@ public class Request {
         return uriParser.getTarget();
     }
 
+    public String getOriginUri(){
+        return uriParser.getURI();
+    }
+
     public int getParameterIntValue(String key){
         Map<String, Object> parameter = uriParser.getParameter();
         return Integer.parseInt(parameter.get(key).toString());
