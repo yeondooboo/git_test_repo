@@ -6,7 +6,9 @@ import infra.Request;
 import service.MemberService;
 import utils.Util;
 
+import java.sql.SQLOutput;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Scanner;
 
 public class MemberController implements Controller{
@@ -36,6 +38,9 @@ public class MemberController implements Controller{
                 break;
             case "modify":
                 modify(request);
+                break;
+            case "list":
+                list();
                 break;
             default:
                 System.out.println("올바른 요청을 보내주시기 바랍니다.");
@@ -160,6 +165,19 @@ public class MemberController implements Controller{
         findMember.setUpdateDate(LocalDateTime.now());
 
         System.out.println("회원 정보가 수정되었습니다.");
+
+    }
+
+    public void list(){
+        System.out.println(" == 회원 목록 == ");
+
+        List<Member> members = memberService.getMembers();
+
+        System.out.println("번호 | 아이디");
+
+        for(Member member : members){
+            System.out.println(member.getId() + " | " + member.getLoginId());
+        }
 
     }
 
