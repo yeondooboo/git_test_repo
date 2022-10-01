@@ -75,5 +75,10 @@ public class Request {
         return parameter.get(key).toString();
     }
 
+    public boolean hasParam(String key){
+        Map<String, Object> parameter = uriParser.getParameter();
+        return parameter.get(key) != null;
+    }
+
 
 }
