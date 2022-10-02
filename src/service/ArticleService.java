@@ -1,7 +1,10 @@
 package service;
 
+import data.Article;
 import infra.Container;
 import repository.ArticleRepository;
+
+import java.util.List;
 
 public class ArticleService {
 
@@ -13,5 +16,21 @@ public class ArticleService {
     }
     public int write(String title, String body, String author) {
     return articleRepository.write(title, body, author);
+    }
+
+    public Article getArticleById(int id) {
+        return articleRepository.getArticleById(id);
+
+    }
+
+    public void delete(Article article) {
+        articleRepository.delete(article);
+
+
+    }
+
+    public List<Article> getArticles() {
+        return articleRepository.getArticles();
+
     }
 }
