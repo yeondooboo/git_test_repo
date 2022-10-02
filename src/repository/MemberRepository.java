@@ -38,4 +38,7 @@ public class MemberRepository {
         return store;
     }
 
+    public void delete(Member member) {
+        store.remove(member);
+    }
 }

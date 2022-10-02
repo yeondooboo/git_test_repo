@@ -43,4 +43,11 @@ public class MemberService {
     public List<Member> getMembers(){
         return memberRepository.getMembers();
     }
+
+    public void delete(String loginId) {
+
+        Member findMember = getMemberByLoginId(loginId);
+        memberRepository.delete(findMember);
+
+    }
 }

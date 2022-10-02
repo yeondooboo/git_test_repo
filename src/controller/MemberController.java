@@ -6,7 +6,6 @@ import infra.Request;
 import service.MemberService;
 import utils.Util;
 
-import java.sql.SQLOutput;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Scanner;
@@ -41,6 +40,9 @@ public class MemberController implements Controller{
                 break;
             case "list":
                 list();
+                break;
+            case "delete":
+                delete(request);
                 break;
             default:
                 System.out.println("올바른 요청을 보내주시기 바랍니다.");
@@ -140,10 +142,8 @@ public class MemberController implements Controller{
             System.out.println(paramKey + " 파라미터가 필요합니다.");
             return;
         }
-        
-        // 1. 파라미터를 통해 전달 받은 값
+
         String parameterValue = request.getParameterStrValue(paramKey);
-        // 2. 로그인한 회원의 아이디
         String logonMemberId = request.getLogonMemberId();
 
         if(!logonMemberId.equals(parameterValue)){
@@ -177,6 +177,39 @@ public class MemberController implements Controller{
 
         for(Member member : members){
             System.out.println(member.getId() + " | " + member.getLoginId());
+        }
+
+    }
+
+    public void delete(Request request){
+
+        String paramKey = "loginId";
+
+        if(!Util.hasParam(request, paramKey)){
+            System.out.println(paramKey + " 파라미터가 필요합니다.");
+            return;
+        }
+
+        String logonMemberId = request.getLogonMemberId();
+        String paramValue = request.getParameterStrValue(paramKey);
+
+        if(!logonMemberId.equals(paramValue)){
+            System.out.println("본인 계정만 탈퇴할 수 있습니다.");
+            return;
+        }
+
+        System.out.print("정말 탈퇴하시겠습니까? ( y / n )");
+        String answer = sc.nextLine().trim().toLowerCase();
+
+        if(answer.equals("n")) {
+            System.out.println("탈퇴 절차를 취소합니다.");
+        }else if(answer.equals("y")){
+            memberService.delete(paramValue);
+            request.logout();
+
+            System.out.println(logonMemberId + "님 그동안 즐거웠습니다!");
+        }else{
+            System.out.println("y 혹은 n을 입력해주세요.");
         }
 
     }
