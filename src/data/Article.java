@@ -10,7 +10,8 @@ public class Article {
     private LocalDateTime regDate;
     private LocalDateTime updataDate;
 
-    public Article(String title, String body, String author){
+    public Article(int id, String title, String body, String author){
+        this.id = id;
         this.title = title;
         this.body = body;
         this.author = author;
